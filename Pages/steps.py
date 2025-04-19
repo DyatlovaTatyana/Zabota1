@@ -11,7 +11,7 @@ class Steps:
         def login_admin(self):
             self.login_page.open_admin(Links.LOGIN)
             self.login_page.login.fill('biblsoln')
-            self.login_page.password.fill('ffffff')
+            self.login_page.password.fill('ffgfffffff')
             self.login_page.click_to_button()
             self.browser.wait_for_load_state('networkidle')
 
