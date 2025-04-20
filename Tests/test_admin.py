@@ -10,11 +10,20 @@ from playwright.sync_api import expect
 
 
 @pytest.mark.usefixtures("browser")
+
 class TestActive:
+    @pytest.mark.parametrize(
+        'login, password',
+        [
+            ('biblsoln', 'Qwerty12345'),
+            ('swimsoln', 'Qwerty1234')
+
+        ]
+    )
     @allure.title("Залогиниться в системе")
-    def test_login(self, browser: Page):
+    def test_login(self, browser: Page, login, password):
         steps=Steps(browser)
-        steps.login_admin()
+        steps.login_admin(login, password)
         expect(browser).to_have_url(Links.HOST_ADMIN) #Ок ли так прописывать проверку или лучше как в след тесте?
 
     @allure.title("Переход на страницу создания занятия")

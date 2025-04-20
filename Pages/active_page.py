@@ -1,3 +1,4 @@
+from datetime import datetime
 from pathlib import Path
 
 from playwright.sync_api import expect
@@ -78,11 +79,18 @@ class Active_Page(BasePage):
     # def dow_button(self):
     #     return self.page.locator('//button[@class="btn btn-success save-button"]')
 
+    def institution(self):
+        return self.page.locator('//span[@id="select2-activelongwrite-establishment_id-container"]')
+
+    def institution_select(self):
+        return self.page.locator('//ul[@id="select2-activelongwrite-establishment_id-results"]//li[1]')
+
+
 
 
     @allure.step("Ввод названия")
     def active_title_input(self):
-        self.active_title.fill('Игра в шахматы')
+        self.active_title.fill(f'Игра в шахматы {str(datetime.now().timestamp()).replace(".", "_")}')
 
     @allure.step("Выбор категории")
     def select_category(self):
@@ -137,3 +145,8 @@ class Active_Page(BasePage):
     @allure.step("Нажать на сохранить")
     def click_to_save_button(self):
         self.save_button().click()
+
+    @allure.step("Выбор учреждения")
+    def select_institution(self):
+        self.institution().click()
+        self.institution_select().click()
