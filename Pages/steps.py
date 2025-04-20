@@ -6,12 +6,12 @@ class Steps:
         def __init__(self, browser):
             self.browser = browser
             self.login_page = Login_Page(browser)
-            self.active_page = Active_Page(browser)
+            self.active_page = Active_Page(browser) #Перенести иниты в метод create_active
 
-        def login_admin(self):
+        def login_admin(self,login,password):
             self.login_page.open_admin(Links.LOGIN)
-            self.login_page.login.fill('biblsoln')
-            self.login_page.password.fill('ffgfffffff')
+            self.login_page.login.fill(login)
+            self.login_page.password.fill(password)
             self.login_page.click_to_button()
             self.browser.wait_for_load_state('networkidle')
 
@@ -29,5 +29,6 @@ class Steps:
             self.active_page.phone_input()
             self.active_page.click_to_save_button()
             self.browser.wait_for_load_state('networkidle')
+
 
 
